@@ -5,18 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Brand & Digital Strategy — CK Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --black:#0A0A0A;--dark:#111111;--white:#FFFFFF;--off-white:#F5F5F5;--light:#F9F9F9;
   --rule:#E5E5E5;--rule-dark:rgba(0,0,0,0.08);--gray:#999999;--mid:#666666;--ink:#1A1A1A;--ink2:#333333;
-  --accent:#1B4D7A;--accent-2:#2E6CA4;--accent-dim:rgba(27,77,122,0.08);--accent-dim2:rgba(27,77,122,0.05);
-  --teal:#0D7377;--amber:#C2841C;
-  --display:'Bebas Neue',Impact,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --accent:#B91800;--accent-2:#C8102E;--accent-dim:rgba(185,24,0,0.08);--accent-dim2:rgba(185,24,0,0.05);
+  --teal:#0D7377;--amber:#C2841C;--green:#2F7D4F;
+  --display:'Barlow Condensed',Impact,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
   --r:2px;--sh:0 1px 4px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.06);--sh-lg:0 2px 8px rgba(0,0,0,0.08),0 12px 40px rgba(0,0,0,0.1);
 }
 html{scroll-behavior:smooth}
+[style*="--display"], .sec-title, .pcard-name, .pcard-price, .pcard-headline, .total-band-lbl, .total-band-amt, .gantt-row-name, .stat-big, .stat-cell-val, .calc-row.total .val, .calc-hdr-title, .pullquote, .cta-stitle, .li-table tfoot td.num{font-weight:600}
 body{font-family:var(--body);background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 section{padding:6rem 3rem}
 @media(max-width:900px){section{padding:3.5rem 1.5rem}}
@@ -33,18 +34,31 @@ section{padding:6rem 3rem}
 
 /* PRICING */
 .pcards{display:grid;grid-template-columns:1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
-.pcard{background:var(--white);transition:background .2s}
+.pcard{background:var(--white);transition:background .2s;position:relative}
+.pcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:center;transition:transform .25s ease;z-index:2}
 .pcard.open{background:var(--light)}
-.pcard-hdr{padding:2rem;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer}
-.pcard-hdr:hover{background:var(--light)}
+.pcard-hdr{padding:2rem;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;transition:padding-bottom .25s ease}
+.pcard-toggle{font-size:.68rem;color:var(--accent);font-weight:500;margin-top:.75rem;letter-spacing:.06em;text-transform:uppercase;transition:transform .25s ease,opacity .2s ease;opacity:.75}
+@media(hover:hover){
+  .pcard:not(.open):hover{background:var(--light)}
+  .pcard:not(.open):hover::before{transform:scaleY(1)}
+  .pcard:not(.open):hover .pcard-hdr{padding-bottom:2rem}
+  .pcard:not(.open):hover .pcard-toggle{transform:translateY(4px);opacity:1}
+  .pcard:not(.open):hover .pcard-name{color:var(--accent)}
+}
+.pcard-name{transition:color .2s ease}
 .pcard-num{font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.75rem;display:block;text-transform:uppercase}
 .pcard-name{font-family:var(--display);font-size:1.75rem;color:var(--black);letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin-bottom:.5rem}
 .pcard-right{text-align:right;flex-shrink:0;padding-left:1rem}
 .pcard-price{font-family:var(--display);font-size:2rem;color:var(--black);letter-spacing:.02em}
 .pcard-period{font-family:var(--body);font-size:.72rem;color:var(--gray);font-weight:400;display:block;margin-top:.2rem}
-.pcard-toggle{font-size:.68rem;color:var(--accent);font-weight:500;margin-top:.75rem;letter-spacing:.06em;text-transform:uppercase}
 .pcard-body{overflow:hidden;max-height:0;transition:max-height .45s ease}
 .pcard-body.open{max-height:3200px}
+@media(hover:hover){
+  .pcard:not(.open):hover .pcard-body{max-height:88px}
+  .pcard-body{position:relative}
+  .pcard:not(.open):hover .pcard-body::after{content:'';position:absolute;left:0;right:0;bottom:0;height:38px;background:linear-gradient(to bottom,rgba(249,249,249,0),var(--light));pointer-events:none}
+}
 .pcard-inner{padding:0 2rem 2rem;border-top:1px solid var(--rule);padding-top:1.5rem}
 .pcard-headline{font-family:var(--display);font-size:1.25rem;color:var(--accent);letter-spacing:.03em;text-transform:uppercase;margin-bottom:.875rem}
 .pcard-desc{font-size:.875rem;color:var(--mid);line-height:1.75;margin-bottom:1.5rem;font-weight:300}
@@ -85,7 +99,7 @@ section{padding:6rem 3rem}
 .gantt{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
 .gantt-scale{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid var(--rule);background:var(--off-white)}
 .gantt-scale-lbl{padding:.85rem 1.25rem;font-family:var(--mono);font-size:.56rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;border-right:1px solid var(--rule);display:flex;align-items:center}
-.gantt-weeks{display:grid;grid-template-columns:repeat(12,1fr)}
+.gantt-weeks{display:grid;grid-template-columns:repeat(18,1fr)}
 .gantt-week{padding:.85rem .15rem;text-align:center;font-family:var(--mono);font-size:.54rem;color:var(--gray);border-right:1px solid var(--rule)}
 .gantt-week:last-child{border-right:none}
 .gantt-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid var(--rule);align-items:center}
@@ -94,13 +108,14 @@ section{padding:6rem 3rem}
 .gantt-row-name{font-family:var(--display);font-size:1.1rem;color:var(--black);letter-spacing:.02em;text-transform:uppercase;line-height:1}
 .gantt-row-dur{font-size:.62rem;color:var(--gray);font-family:var(--mono);margin-top:.3rem;letter-spacing:.04em}
 .gantt-track{position:relative;height:66px}
-.gantt-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr)}
+.gantt-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(18,1fr)}
 .gantt-grid span{border-right:1px solid var(--rule)}
 .gantt-grid span:last-child{border-right:none}
 .gantt-bar{position:absolute;top:50%;transform:translateY(-50%);height:28px;border-radius:3px;display:flex;align-items:center;padding:0 .75rem;font-family:var(--mono);font-size:.6rem;color:#fff;letter-spacing:.04em;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.12)}
 .gantt-bar.rebrand{background:var(--accent)}
-.gantt-bar.web{background:var(--accent-2)}
+.gantt-bar.web{background:var(--ink)}
 .gantt-bar.video{background:var(--amber)}
+.gantt-bar.rollout{background:var(--green)}
 .gantt-bar-ext{opacity:.45;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25),rgba(255,255,255,.25) 4px,transparent 4px,transparent 8px)}
 @media(max-width:760px){
   .gantt-scale,.gantt-row{grid-template-columns:96px 1fr}
@@ -204,16 +219,16 @@ section{padding:6rem 3rem}
   <div class="si">
     <div class="sec-hdr">
       <span class="sec-lbl">01 — Investment Breakdown</span>
-      <h2 class="sec-title">Three moves. One<br>credible firm.</h2>
+      <h2 class="sec-title">Four moves. One<br>credible firm.</h2>
       <p class="sec-sub">Each engagement is an asset, not an expense — a durable upgrade to how CK is perceived by clients and candidates. Click any card to expand the rationale and the line-item breakdown.</p>
     </div>
     <div class="pcards" id="pcards"></div>
     <div class="total-band">
       <div>
         <div class="total-band-lbl">Total Engagement Investment</div>
-        <div class="total-band-sub">One-time buildout · Rebrand + Website + Careers Video</div>
+        <div class="total-band-sub">One-time buildout · Rebrand + Website + Careers Video + Rollout</div>
       </div>
-      <div class="total-band-amt">$50,485</div>
+      <div class="total-band-amt">$54,078</div>
     </div>
   </div>
 </section>
@@ -224,7 +239,7 @@ section{padding:6rem 3rem}
     <div class="sec-hdr">
       <span class="sec-lbl">02 — Typical Timeline</span>
       <h2 class="sec-title">A sequenced rollout,<br>not a scramble.</h2>
-      <p class="sec-sub">The brand comes first because it sets the visual language everything else inherits — the website and the careers video both build on the identity decisions made in the rebrand. Video production runs in parallel with the website build to compress the overall schedule.</p>
+      <p class="sec-sub">The brand comes first because it sets the visual language everything else inherits — the website, careers video, and rollout all build on the identity decisions made in the rebrand. Video and rollout production run in parallel with the website build to compress the overall schedule.</p>
     </div>
 
     <div class="gantt">
@@ -235,6 +250,8 @@ section{padding:6rem 3rem}
           <div class="gantt-week">W4</div><div class="gantt-week">W5</div><div class="gantt-week">W6</div>
           <div class="gantt-week">W7</div><div class="gantt-week">W8</div><div class="gantt-week">W9</div>
           <div class="gantt-week">W10</div><div class="gantt-week">W11</div><div class="gantt-week">W12</div>
+          <div class="gantt-week">W13</div><div class="gantt-week">W14</div><div class="gantt-week">W15</div>
+          <div class="gantt-week">W16</div><div class="gantt-week">W17</div><div class="gantt-week">W18</div>
         </div>
       </div>
 
@@ -245,21 +262,21 @@ section{padding:6rem 3rem}
           <div class="gantt-row-dur">4–6 weeks</div>
         </div>
         <div class="gantt-track">
-          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="gantt-bar rebrand" style="left:0%;width:33.33%">Identity &amp; system</div>
-          <div class="gantt-bar rebrand gantt-bar-ext" style="left:33.33%;width:16.67%"></div>
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar rebrand" style="left:0%;width:22.22%">Identity &amp; system</div>
+          <div class="gantt-bar rebrand gantt-bar-ext" style="left:22.22%;width:11.11%"></div>
         </div>
       </div>
 
-      <!-- WEBSITE: 6-12 weeks, starts W6 -> solid W6-W12 (6wk floor), dashed represents range tail handled by note -->
+      <!-- WEBSITE: bar spans W3-W15 -->
       <div class="gantt-row">
         <div class="gantt-row-lbl">
           <div class="gantt-row-name">Website Rebuild</div>
-          <div class="gantt-row-dur">6–12 weeks</div>
+          <div class="gantt-row-dur">8–12 weeks</div>
         </div>
         <div class="gantt-track">
-          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="gantt-bar web" style="left:41.67%;width:50%">Design → build → launch</div>
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar web" style="left:11.11%;width:66.67%">Design → build → launch</div>
         </div>
       </div>
 
@@ -270,22 +287,36 @@ section{padding:6rem 3rem}
           <div class="gantt-row-dur">2–3 weeks · concurrent</div>
         </div>
         <div class="gantt-track">
-          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="gantt-bar video" style="left:50%;width:16.67%">Shoot &amp; edit</div>
-          <div class="gantt-bar video gantt-bar-ext" style="left:66.67%;width:8.33%"></div>
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar video" style="left:33.33%;width:11.11%">Shoot &amp; edit</div>
+          <div class="gantt-bar video gantt-bar-ext" style="left:44.44%;width:5.56%"></div>
+        </div>
+      </div>
+
+      <!-- ROLLOUT: post-website, W15-W18 -->
+      <div class="gantt-row">
+        <div class="gantt-row-lbl">
+          <div class="gantt-row-name">Rollout</div>
+          <div class="gantt-row-dur">2–3 weeks · post-launch</div>
+        </div>
+        <div class="gantt-track">
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar rollout" style="left:77.78%;width:11.11%">PR · print · social · signage</div>
+          <div class="gantt-bar rollout gantt-bar-ext" style="left:88.89%;width:5.56%"></div>
         </div>
       </div>
     </div>
 
     <div class="gantt-legend">
       <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--accent)"></span>Rebrand</div>
-      <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--accent-2)"></span>Website Rebuild</div>
+      <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--ink)"></span>Website Rebuild</div>
       <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--amber)"></span>Careers Video</div>
+      <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--green)"></span>Rollout</div>
       <div class="gantt-legend-item"><span class="gantt-legend-swatch gantt-bar-ext" style="background:var(--mid)"></span>Range / buffer</div>
     </div>
 
     <div class="gantt-callout">
-      <strong>Why this order:</strong> The website and the careers video both inherit the typography, color, and tone established in the rebrand, so the identity is locked before either begins. Running video production alongside the website build keeps the full program to roughly <strong>12 weeks end-to-end</strong> rather than ~17 if run sequentially. Solid bars show the working schedule; hatched segments show the range / review buffer.
+      <strong>Why this order:</strong> The website, careers video, and rollout all inherit the typography, color, and tone established in the rebrand, so the identity is locked before any of them begin. Rollout kicks off once the website launches — PR, print, social, and signage go live as a coordinated push to market. Running these in parallel keeps the full program to roughly <strong>18 weeks end-to-end</strong> rather than ~25 if run sequentially. Solid bars show the working schedule; hatched segments show the range / review buffer.
     </div>
   </div>
 </section>
@@ -303,7 +334,7 @@ section{padding:6rem 3rem}
       <div class="stat-cell"><div class="stat-cell-val accent">28%</div><div class="stat-cell-lbl">Lower turnover at firms with a strong employer brand</div></div>
       <div class="stat-cell"><div class="stat-cell-val accent">up to&nbsp;50%</div><div class="stat-cell-lbl">Reduction in cost-per-hire</div></div>
       <div class="stat-cell"><div class="stat-cell-val accent">50%</div><div class="stat-cell-lbl">More qualified applicants per opening</div></div>
-      <div class="stat-cell"><div class="stat-cell-val accent">1–2×</div><div class="stat-cell-lbl">Faster time-to-hire</div></div>
+      <div class="stat-cell"><div class="stat-cell-val accent">Up to 2×</div><div class="stat-cell-lbl">Faster time-to-hire</div></div>
     </div>
 
     <div class="prose">
@@ -323,15 +354,15 @@ section{padding:6rem 3rem}
     <div class="calc">
       <div class="calc-hdr">
         <div class="calc-hdr-title">Illustrative Payback Model</div>
-        <div class="calc-hdr-sub">A conservative, directional estimate — not a guarantee. Adjust the inputs to CK's actual hiring plan.</div>
+        <div class="calc-hdr-sub">A conservative, directional estimate — not a guarantee.</div>
       </div>
       <div class="calc-body">
-        <div class="calc-row"><span class="lbl">Planned engineering / staff hires over 24 months</span><span class="val">10 hires</span></div>
-        <div class="calc-row"><span class="lbl">Blended fully-loaded cost-per-hire today (incl. agency &amp; staff time)</span><span class="val">$9,000</span></div>
-        <div class="calc-row"><span class="lbl">Conservative cost-per-hire reduction from stronger brand (≈30%)</span><span class="val">−$2,700 / hire</span></div>
-        <div class="calc-row"><span class="lbl">Direct hiring savings across 10 hires</span><span class="val">$27,000</span></div>
-        <div class="calc-row"><span class="lbl">One avoided first-year turnover event (≈⅓ of $95k salary)</span><span class="val">$31,000</span></div>
-        <div class="calc-row total"><span class="lbl">Modeled 2-year value, hiring alone</span><span class="val">$58,000</span></div>
+        <div class="calc-row calc-anim"><span class="lbl">Planned engineering / staff hires over 24 months</span><span class="val" data-val="10" data-suffix=" hires" data-prefix="">10 hires</span></div>
+        <div class="calc-row calc-anim"><span class="lbl">Blended fully-loaded cost-per-hire today (incl. agency &amp; staff time)</span><span class="val" data-val="9000" data-prefix="$" data-suffix="">$9,000</span></div>
+        <div class="calc-row calc-anim"><span class="lbl">Conservative cost-per-hire reduction from stronger brand (≈30%)</span><span class="val" data-val="2700" data-prefix="−$" data-suffix=" / hire">−$2,700 / hire</span></div>
+        <div class="calc-row calc-anim"><span class="lbl">Direct hiring savings across 10 hires</span><span class="val" data-val="27000" data-prefix="$" data-suffix="">$27,000</span></div>
+        <div class="calc-row calc-anim"><span class="lbl">One avoided first-year turnover event (≈⅓ of $95k salary)</span><span class="val" data-val="31000" data-prefix="$" data-suffix="">$31,000</span></div>
+        <div class="calc-row total calc-anim calc-total-row"><span class="lbl">Modeled 2-year value (savings), hiring alone</span><span class="val" data-val="58000" data-prefix="$" data-suffix="">$58,000 <span class="savings-tag" style="font-family:var(--body);font-size:.75rem;font-weight:500;color:var(--gray);letter-spacing:.06em;text-transform:uppercase">savings</span></span></div>
       </div>
       <div class="calc-foot">Figures are illustrative benchmarks drawn from the cited employer-branding research applied to representative CK inputs; they exclude all client-side revenue impact covered in the next section. Actual results vary with market conditions, hiring volume, and execution. The intent is to show that the recruiting case alone can rationalize the rebrand before any client-facing benefit is counted.</div>
     </div>
@@ -447,7 +478,7 @@ function openSources(){var o=document.getElementById('sources-overlay');o.style.
 function closeSources(){var o=document.getElementById('sources-overlay');o.style.display='none';document.body.style.overflow='';}
 
 var pricingData=[
-  {num:'01',name:'Rebrand',tag:'Brand Foundation',price:'$18,515',period:'one-time · incl. agency fee',
+  {num:'01',name:'Rebrand',tag:'Brand Foundation',price:'$12,449',period:'one-time · incl. agency fee',
    headline:'MATURE THE IDENTITY TO MATCH THE AMBITION.',
    desc:'A complete identity system designed to make CK read as the established, growth-ready firm it is becoming — built on the restraint and precision that signal credibility in engineering. Everything downstream inherits this foundation.',
    bullets:[
@@ -461,18 +492,18 @@ var pricingData=[
    tags:['Brand Strategy','Identity System','Logo','Guidelines','Creative Direction'],
    rows:[
      {desc:'<em>Pre-Production · R&amp;D</em>',detail:'',amount:'',group:true},
-     {desc:'Market + Competitor Research',detail:'14 hrs',amount:'$2,800'},
-     {desc:'Brand positioning & messaging strategy',detail:'14 hrs',amount:'$2,800'},
+     {desc:'Market + Competitor Research',detail:'4 hrs',amount:'$800'},
+     {desc:'Brand positioning & messaging strategy',detail:'7 hrs',amount:'$1,400'},
      {desc:'Meetings',detail:'12 hrs',amount:'$1,200'},
-     {desc:'Subtotal — Pre-Production',detail:'',amount:'$6,800',sub:true},
+     {desc:'Subtotal — Pre-Production',detail:'',amount:'$3,400',sub:true},
      {desc:'<em>Production · Design</em>',detail:'',amount:'',group:true},
      {desc:'3 Logo Options',detail:'22 hrs',amount:'$4,400'},
      {desc:'Brand Guidelines (color + type + standards)',detail:'8 hrs',amount:'$1,600'},
-     {desc:'Creative Direction',detail:'12 hrs',amount:'$2,400'},
-     {desc:'3 Rounds of Revisions',detail:'12 hrs',amount:'$900'},
-     {desc:'Subtotal — Production',detail:'',amount:'$9,300',sub:true},
-     {desc:'Production Subtotal',detail:'',amount:'$16,100',sub:true},
-     {desc:'Agency Fee',detail:'15%',amount:'$2,415'}
+     {desc:'Creative Direction',detail:'6 hrs',amount:'$1,200'},
+     {desc:'3 Rounds of Revisions',detail:'3 hrs',amount:'$225'},
+     {desc:'Subtotal — Production',detail:'',amount:'$7,425',sub:true},
+     {desc:'Production Subtotal',detail:'',amount:'$10,825',sub:true},
+     {desc:'Agency Fee',detail:'15%',amount:'$1,624'}
    ]},
   {num:'02',name:'Website Rebuild',tag:'Digital Home',price:'$24,725',period:'one-time · incl. agency fee',
    headline:'THE CREDIBLE DIGITAL HOME LARGER CLIENTS EXPECT.',
@@ -508,32 +539,56 @@ var pricingData=[
      {desc:'Production Subtotal',detail:'',amount:'$21,500',sub:true},
      {desc:'Agency Fee',detail:'15%',amount:'$3,225'}
    ]},
-  {num:'03',name:'Careers Video',tag:'Recruiting Asset',price:'$7,245',period:'one-time · incl. agency fee',
+  {num:'03',name:'Careers Video',tag:'Recruiting Asset',price:'$7,244',period:'one-time · incl. agency fee & tax',
    headline:'PROVE — VISUALLY — THAT CK IS WORTH JOINING.',
    desc:'A short, polished careers video for the new careers landing page that shows engineers the real CK: the work, the people, the growth track. Produced in parallel with the website so the page launches complete.',
    bullets:[
-     'Pre-production: director, DP, and producer planning the shoot',
-     'On-site / team filming day capturing real work and culture',
+     'Pre-production: director and producer planning the shoot',
+     'Director/DP and grip/producer on-site filming day',
+     'Full equipment package for a professional production',
      'Professional editing, color, and finishing',
-     'Brand-consistent titling and lower-thirds from the new identity',
-     'Optimized exports for web, social, and the careers landing page',
-     'Short-form cutdowns for LinkedIn and recruiting outreach'
+     'Licensed music and brand-consistent audio',
+     'Optimized exports for web, social, and the careers landing page'
    ],
-   tags:['Concept','Production','Editing','Motion Graphics','Social Cutdowns'],
+   tags:['Concept','Production','Editing','Music Licensing','Social Cutdowns'],
    rows:[
-     {desc:'<em>Pre-Production</em>',detail:'',amount:'',group:true},
-     {desc:'Pre-Pro Director',detail:'3 hrs',amount:'$1,800'},
-     {desc:'Pre-Pro DP',detail:'2 hrs',amount:'$1,000'},
-     {desc:'Pre-Pro Producer',detail:'15 hrs',amount:'$1,200'},
-     {desc:'Subtotal — Pre-Production',detail:'',amount:'$4,000',sub:true},
-     {desc:'<em>Production</em>',detail:'',amount:'',group:true},
-     {desc:'Director',detail:'1 day',amount:'$1,500'},
-     {desc:'Subtotal — Production',detail:'',amount:'$1,500',sub:true},
-     {desc:'<em>Post-Production</em>',detail:'',amount:'',group:true},
-     {desc:'Editing',detail:'1 unit',amount:'$800'},
-     {desc:'Subtotal — Post-Production',detail:'',amount:'$800',sub:true},
-     {desc:'Production Subtotal',detail:'',amount:'$6,300',sub:true},
-     {desc:'Agency Fee',detail:'15%',amount:'$945'}
+     {desc:'<em>Pre-Production · R&amp;D</em>',detail:'',amount:'',group:true},
+     {desc:'Director Pre-Pro',detail:'4 hrs',amount:'$800'},
+     {desc:'Producer',detail:'3 hrs',amount:'$600'},
+     {desc:'Subtotal — Pre-Production',detail:'',amount:'$1,400',sub:true},
+     {desc:'<em>Production · Design</em>',detail:'',amount:'',group:true},
+     {desc:'Director/DP',detail:'8 hrs',amount:'$1,600'},
+     {desc:'Grip/Producer',detail:'1 day rate',amount:'$600'},
+     {desc:'Equipment Package',detail:'1 day rate',amount:'$600'},
+     {desc:'Subtotal — Production',detail:'',amount:'$2,800',sub:true},
+     {desc:'<em>Post-Production · Development · Deployment</em>',detail:'',amount:'',group:true},
+     {desc:'Editing',detail:'10 hrs',amount:'$2,000'},
+     {desc:'Music Licensing',detail:'flat fee',amount:'$50'},
+     {desc:'Subtotal — Post-Production',detail:'',amount:'$2,050',sub:true},
+     {desc:'Production Subtotal',detail:'',amount:'$6,250',sub:true},
+     {desc:'Agency Fee',detail:'15%',amount:'$938'},
+     {desc:'Sales Tax',detail:'',amount:'$56'}
+   ]},
+  {num:'04',name:'Rollout',tag:'Brand Activation',price:'$9,660',period:'one-time · incl. agency fee',
+   headline:'PUT THE NEW BRAND IN MARKET.',
+   desc:'Once the identity is set, rollout takes it live — the tangible and digital assets that carry the new brand into the world, from PR to print to social. This is how clients and candidates actually encounter the refreshed CK.',
+   bullets:[
+     'PR boost to announce the rebrand and amplify reach',
+     'Updated business cards on the new identity',
+     'Social media video content to launch the brand across channels',
+     'Exterior / office signage reflecting the new look',
+     'Consistent application of the identity system across every touchpoint',
+     'Coordinated timing with the website and careers video launch'
+   ],
+   tags:['PR','Print','Social Video','Signage','Brand Activation'],
+   rows:[
+     {desc:'<em>Rollout Assets</em>',detail:'',amount:'',group:true},
+     {desc:'PR Boost',detail:'',amount:'$800'},
+     {desc:'Business Cards',detail:'',amount:'$400'},
+     {desc:'Social Media Videos',detail:'',amount:'$3,200'},
+     {desc:'Signs',detail:'',amount:'$4,000'},
+     {desc:'Production Subtotal',detail:'',amount:'$8,400',sub:true},
+     {desc:'Agency Fee',detail:'15%',amount:'$1,260'}
    ]}
 ];
 
@@ -610,6 +665,110 @@ function toggleCard(i){
 }
 
 renderPricingCards();
+</script>
+<style>
+/* ── CALC ANIMATION ── */
+.calc{position:relative;overflow:visible}
+.calc::before{content:'';position:absolute;left:-3px;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.calc.is-visible::before{transform:scaleY(1)}
+
+.calc-anim{opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}
+.calc-anim.revealed{opacity:1;transform:translateY(0)}
+
+.calc-total-row .val{transition:color .3s ease}
+.calc-total-row.punch .val{animation:totalPunch .55s cubic-bezier(.36,.07,.19,.97) both}
+.calc-total-row.punch .savings-tag{animation:savingsFade .5s ease .45s both}
+.savings-tag{opacity:0}
+.calc-total-row.punch .savings-tag{opacity:1}
+
+@keyframes totalPunch{
+  0%  {transform:scale(1)}
+  25% {transform:scale(1.12)}
+  50% {transform:scale(.97)}
+  70% {transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+@keyframes savingsFade{
+  from{opacity:0;transform:translateX(8px)}
+  to  {opacity:1;transform:translateX(0)}
+}
+@media(prefers-reduced-motion:reduce){
+  .calc-anim{opacity:1;transform:none;transition:none}
+  .calc::before{transform:scaleY(1);transition:none}
+  .savings-tag{opacity:1}
+}
+</style>
+
+<script>
+(function(){
+  var calc=document.querySelector('.calc');
+  if(!calc)return;
+
+  var rows=calc.querySelectorAll('.calc-anim');
+  var totalRow=calc.querySelector('.calc-total-row');
+  var fired=false;
+
+  function formatNum(n){
+    return n.toLocaleString('en-US');
+  }
+
+  function countUp(el,target,prefix,suffix,duration,onDone){
+    var start=null;
+    var startVal=0;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/duration,1);
+      // ease out expo
+      var ease=p===1?1:1-Math.pow(2,-10*p);
+      var cur=Math.round(startVal+(target-startVal)*ease);
+      el.childNodes[0].textContent=prefix+formatNum(cur)+suffix;
+      if(p<1){requestAnimationFrame(step);}
+      else{el.childNodes[0].textContent=prefix+formatNum(target)+suffix;if(onDone)onDone();}
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runAnimation(){
+    if(fired)return;
+    fired=true;
+    calc.classList.add('is-visible');
+
+    // stagger row reveals
+    rows.forEach(function(row,i){
+      setTimeout(function(){
+        row.classList.add('revealed');
+        // countup on numeric vals
+        var valEl=row.querySelector('.val[data-val]');
+        if(!valEl)return;
+        var target=parseInt(valEl.getAttribute('data-val'),10);
+        var prefix=valEl.getAttribute('data-prefix')||'';
+        var suffix=valEl.getAttribute('data-suffix')||'';
+        var isTotal=row.classList.contains('calc-total-row');
+        var duration=isTotal?1100:700;
+        var delay=isTotal?180:0;
+        setTimeout(function(){
+          countUp(valEl,target,prefix,suffix,duration,function(){
+            if(isTotal){
+              row.classList.add('punch');
+            }
+          });
+        },delay);
+      },i*130);
+    });
+  }
+
+  // IntersectionObserver — fire when calc is 30% in view
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){runAnimation();obs.disconnect();}
+      });
+    },{threshold:.3});
+    obs.observe(calc);
+  } else {
+    runAnimation();
+  }
+})();
 </script>
 </body>
 </html>
