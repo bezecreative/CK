@@ -12,6 +12,7 @@
   --black:#0A0A0A;--dark:#111111;--white:#FFFFFF;--off-white:#F5F5F5;--light:#F9F9F9;
   --rule:#E5E5E5;--rule-dark:rgba(0,0,0,0.08);--gray:#999999;--mid:#666666;--ink:#1A1A1A;--ink2:#333333;
   --accent:#B91800;--accent-2:#C8102E;--accent-dim:rgba(185,24,0,0.08);--accent-dim2:rgba(185,24,0,0.05);
+  --neutral-tint:#F0F0F0;--neutral-border:#E0E0E0;
   --teal:#0D7377;--amber:#C2841C;--green:#2F7D4F;
   --display:'Barlow Condensed',Impact,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
   --r:2px;--sh:0 1px 4px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.06);--sh-lg:0 2px 8px rgba(0,0,0,0.08),0 12px 40px rgba(0,0,0,0.1);
@@ -71,7 +72,7 @@ section{padding:6rem 3rem}
 
 /* LINE-ITEM TABLE */
 .li-wrap{margin-top:1.75rem;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
-.li-note-rec{margin-top:1.75rem;padding:.95rem 1.25rem;background:var(--accent-dim);border:1px solid rgba(27,77,122,.15);border-left:3px solid var(--accent);border-radius:4px;font-size:.8125rem;color:var(--ink2);line-height:1.65;font-weight:300}
+.li-note-rec{margin-top:1.75rem;padding:.95rem 1.25rem;background:var(--neutral-tint);border:1px solid var(--neutral-border);border-left:3px solid var(--accent);border-radius:4px;font-size:.8125rem;color:var(--ink2);line-height:1.65;font-weight:300}
 .li-note-rec strong{color:var(--accent);font-weight:600}
 .li-note-rec + .li-wrap{margin-top:.75rem}
 .li-wrap-hdr{background:var(--off-white);padding:.75rem 1.25rem;font-family:var(--mono);font-size:.58rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:1rem}
@@ -84,7 +85,7 @@ section{padding:6rem 3rem}
 .li-table tfoot td{padding:.9rem 1.25rem;border-top:2px solid var(--ink);font-weight:600;color:var(--ink);font-size:.875rem;background:var(--off-white)}
 .li-table tfoot td.num{font-family:var(--display);font-size:1.25rem;letter-spacing:.02em;color:var(--accent);font-weight:400}
 .li-placeholder td{padding:1.4rem 1.25rem;text-align:center;color:var(--gray);font-size:.78rem;font-weight:300;background:repeating-linear-gradient(45deg,var(--light),var(--light) 10px,var(--off-white) 10px,var(--off-white) 20px)}
-.li-table tr.li-group td{background:var(--accent-dim);padding:.55rem 1.25rem;border-bottom:1px solid var(--rule)}
+.li-table tr.li-group td{background:var(--neutral-tint);padding:.55rem 1.25rem;border-bottom:1px solid var(--rule)}
 .li-table tr.li-group em{font-style:normal;font-family:var(--mono);font-size:.58rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
 .li-table tr.li-sub td{background:var(--light);font-weight:600;color:var(--ink)}
 .li-table tr.li-sub td.desc{color:var(--ink)}
@@ -127,7 +128,7 @@ section{padding:6rem 3rem}
 .gantt-legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;padding:0 .25rem}
 .gantt-legend-item{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--mid);font-weight:300}
 .gantt-legend-swatch{width:14px;height:14px;border-radius:3px}
-.gantt-callout{margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--accent-dim);border:1px solid rgba(27,77,122,.15);border-left:3px solid var(--accent);border-radius:4px;font-size:.8125rem;color:var(--ink2);line-height:1.7;font-weight:300}
+.gantt-callout{margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--neutral-tint);border:1px solid var(--neutral-border);border-left:3px solid var(--accent);border-radius:4px;font-size:.8125rem;color:var(--ink2);line-height:1.7;font-weight:300}
 .gantt-callout strong{color:var(--accent);font-weight:600}
 
 /* RESEARCH */
@@ -179,7 +180,8 @@ section{padding:6rem 3rem}
 .cta-stext{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7;font-weight:300}
 .cta-actions{display:flex;gap:1rem;margin-top:3rem;flex-wrap:wrap;align-items:center}
 .btn-accent{background:var(--accent);color:var(--white);border:none;padding:1rem 2.5rem;font-family:var(--body);font-size:.875rem;font-weight:600;border-radius:var(--r);cursor:pointer;transition:all .2s;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:inline-block}
-.btn-accent:hover{background:#143a5e;transform:translateY(-1px)}
+.btn-accent:hover{background:var(--black);transform:translateY(-1px)}
+.btn-accent.btn-white-hover:hover{background:var(--white);color:var(--black);transform:translateY(-1px)}
 
 /* FOOTER */
 .footer{background:rgba(0,0,0,.95);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:1rem}
@@ -207,7 +209,7 @@ section{padding:6rem 3rem}
       <div style="width:1px;height:24px;background:var(--rule)"></div>
       <img src="https://ck-engineers.com/wp-content/uploads/sites/2/2026/02/CKLogo.png" alt="CK Engineering" style="height:46px;width:auto;object-fit:contain" />
     </div>
-    <div style="display:inline-flex;align-items:center;gap:.625rem;font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.75rem;padding:.35rem .75rem;background:var(--accent-dim);border:1px solid rgba(27,77,122,.15);border-radius:2px">◆ Brand &amp; Digital Strategy · June 2026</div>
+    <div style="display:inline-flex;align-items:center;gap:.625rem;font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.75rem;padding:.35rem .75rem;background:var(--neutral-tint);border:1px solid var(--neutral-border);border-radius:2px">◆ Brand &amp; Digital Strategy · June 2026</div>
     <h1 style="font-family:var(--display);font-size:clamp(3rem,6vw,5.5rem);line-height:.95;color:var(--black);letter-spacing:.02em;text-transform:uppercase;margin-bottom:1.5rem">A Brand Built<br>to <span style="color:var(--accent)">Scale With You.</span></h1>
     <p style="font-size:.9375rem;color:var(--mid);line-height:1.75;max-width:680px;font-weight:300;margin-bottom:2.5rem">CK Engineering has spent two decades earning a reputation for precise, reliable, buildable design across commercial, industrial, and residential land development. You're entering a period of rapid growth — and the brand needs to signal the firm you're becoming, not the one you started as. This is a plan to mature CK's identity, modernize its digital home, and turn the careers page into a recruiting asset, so the right clients and the right engineers encounter a firm worthy of their trust before the first conversation.</p>
     <button class="btn-accent" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View the Investment ↓</button>
@@ -220,7 +222,7 @@ section{padding:6rem 3rem}
     <div class="sec-hdr">
       <span class="sec-lbl">01 — Investment Breakdown</span>
       <h2 class="sec-title">Four moves. One<br>credible firm.</h2>
-      <p class="sec-sub">Each engagement is an asset, not an expense — a durable upgrade to how CK is perceived by clients and candidates. Click any card to expand the rationale and the line-item breakdown.</p>
+      <p class="sec-sub">Each engagement is a durable upgrade to how CK is perceived by clients and candidates. Click any card to expand the rationale and the line-item breakdown.</p>
     </div>
     <div class="pcards" id="pcards"></div>
     <div class="total-band">
@@ -228,7 +230,7 @@ section{padding:6rem 3rem}
         <div class="total-band-lbl">Total Engagement Investment</div>
         <div class="total-band-sub">One-time buildout · Rebrand + Website + Careers Video + Rollout</div>
       </div>
-      <div class="total-band-amt">$54,078</div>
+      <div class="total-band-amt">$54,728</div>
     </div>
   </div>
 </section>
@@ -315,9 +317,6 @@ section{padding:6rem 3rem}
       <div class="gantt-legend-item"><span class="gantt-legend-swatch gantt-bar-ext" style="background:var(--mid)"></span>Range / buffer</div>
     </div>
 
-    <div class="gantt-callout">
-      <strong>Why this order:</strong> The website, careers video, and rollout all inherit the typography, color, and tone established in the rebrand, so the identity is locked before any of them begin. Rollout kicks off once the website launches — PR, print, social, and signage go live as a coordinated push to market. Running these in parallel keeps the full program to roughly <strong>18 weeks end-to-end</strong> rather than ~25 if run sequentially. Solid bars show the working schedule; hatched segments show the range / review buffer.
-    </div>
   </div>
 </section>
 
@@ -365,6 +364,10 @@ section{padding:6rem 3rem}
         <div class="calc-row total calc-anim calc-total-row"><span class="lbl">Modeled 2-year value (savings), hiring alone</span><span class="val" data-val="58000" data-prefix="$" data-suffix="">$58,000 <span class="savings-tag" style="font-family:var(--body);font-size:.75rem;font-weight:500;color:var(--gray);letter-spacing:.06em;text-transform:uppercase">savings</span></span></div>
       </div>
       <div class="calc-foot">Figures are illustrative benchmarks drawn from the cited employer-branding research applied to representative CK inputs; they exclude all client-side revenue impact covered in the next section. Actual results vary with market conditions, hiring volume, and execution. The intent is to show that the recruiting case alone can rationalize the rebrand before any client-facing benefit is counted.</div>
+      <div style="margin-top:1px;padding:1.25rem 2rem;background:var(--black);border-radius:0 0 4px 4px;display:flex;align-items:flex-start;gap:1rem">
+        <div style="font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0;padding-top:.1rem">↑ Note</div>
+        <div style="font-size:.875rem;color:rgba(255,255,255,.75);line-height:1.75;font-weight:300">This payback comes from <strong style="color:var(--white);font-weight:600">hiring alone.</strong> It doesn't account for the market growth, elevated client perception, and higher-value project opportunities that consistently follow a mature rebrand — which in professional services are often the larger long-term return.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -421,7 +424,7 @@ section{padding:6rem 3rem}
       <div class="cta-step"><span class="cta-num">Step 04</span><div class="cta-stitle">Launch</div><div class="cta-stext">New brand, site, and careers landing page go live together — a coherent debut for clients and recruits alike.</div></div>
     </div>
     <div class="cta-actions">
-      <a href="https://wearemox.com/contact" target="_blank" class="btn-accent">Start with Mox →</a>
+      <a href="https://wearemox.com/contact" target="_blank" class="btn-accent btn-white-hover">Start with Mox →</a>
     </div>
   </div>
 </section>
@@ -478,7 +481,7 @@ function openSources(){var o=document.getElementById('sources-overlay');o.style.
 function closeSources(){var o=document.getElementById('sources-overlay');o.style.display='none';document.body.style.overflow='';}
 
 var pricingData=[
-  {num:'01',name:'Rebrand',tag:'Brand Foundation',price:'$12,449',period:'one-time · incl. agency fee',
+  {num:'01',name:'Rebrand',tag:'Brand Foundation',price:'$13,099',period:'one-time · incl. agency fee & tax',
    headline:'MATURE THE IDENTITY TO MATCH THE AMBITION.',
    desc:'A complete identity system designed to make CK read as the established, growth-ready firm it is becoming — built on the restraint and precision that signal credibility in engineering. Everything downstream inherits this foundation.',
    bullets:[
@@ -503,7 +506,8 @@ var pricingData=[
      {desc:'3 Rounds of Revisions',detail:'3 hrs',amount:'$225'},
      {desc:'Subtotal — Production',detail:'',amount:'$7,425',sub:true},
      {desc:'Production Subtotal',detail:'',amount:'$10,825',sub:true},
-     {desc:'Agency Fee',detail:'15%',amount:'$1,624'}
+     {desc:'Agency Fee',detail:'15%',amount:'$1,624'},
+     {desc:'Sales Tax',detail:'6%',amount:'$650'}
    ]},
   {num:'02',name:'Website Rebuild',tag:'Digital Home',price:'$24,725',period:'one-time · incl. agency fee',
    headline:'THE CREDIBLE DIGITAL HOME LARGER CLIENTS EXPECT.',
@@ -585,7 +589,7 @@ var pricingData=[
      {desc:'<em>Rollout Assets</em>',detail:'',amount:'',group:true},
      {desc:'PR Boost',detail:'',amount:'$800'},
      {desc:'Business Cards',detail:'',amount:'$400'},
-     {desc:'Social Media Videos',detail:'',amount:'$3,200'},
+     {desc:'Social Media Posts (graphics and videos)',detail:'',amount:'$3,200'},
      {desc:'Signs',detail:'',amount:'$4,000'},
      {desc:'Production Subtotal',detail:'',amount:'$8,400',sub:true},
      {desc:'Agency Fee',detail:'15%',amount:'$1,260'}
@@ -611,7 +615,6 @@ function buildLineItems(item){
     bodyRows = '<tr class="li-placeholder"><td colspan="3">Line-item breakdown to be added — drop your spreadsheet rows here.</td></tr>';
   }
   return ''+
-  '<div class="li-note-rec"><strong>Based on our current knowledge, this is what we recommend.</strong> If these are within your range, we can dive in further and adjust the scope and line items together.</div>'+
   '<div class="li-wrap">'+
     '<div class="li-wrap-hdr"><span>Line-Item Breakdown</span><span>'+item.name+' · '+item.price+'</span></div>'+
     '<table class="li-table">'+
