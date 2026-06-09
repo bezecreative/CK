@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brand & Digital Strategy — CK Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;--dark:#111111;--white:#FFFFFF;--off-white:#F5F5F5;--light:#F9F9F9;
+  --rule:#E5E5E5;--rule-dark:rgba(0,0,0,0.08);--gray:#999999;--mid:#666666;--ink:#1A1A1A;--ink2:#333333;
+  --accent:#1B4D7A;--accent-2:#2E6CA4;--accent-dim:rgba(27,77,122,0.08);--accent-dim2:rgba(27,77,122,0.05);
+  --teal:#0D7377;--amber:#C2841C;
+  --display:'Bebas Neue',Impact,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:2px;--sh:0 1px 4px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.06);--sh-lg:0 2px 8px rgba(0,0,0,0.08),0 12px 40px rgba(0,0,0,0.1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+section{padding:6rem 3rem}
+@media(max-width:900px){section{padding:3.5rem 1.5rem}}
+.si{max-width:1200px;margin:0 auto}
+.sec-lbl{font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;display:block}
+.sec-title{font-family:var(--display);font-size:clamp(2.25rem,4.5vw,3.75rem);color:var(--black);line-height:.95;letter-spacing:.02em;text-transform:uppercase;margin-bottom:1.25rem}
+.sec-sub{font-size:.9375rem;color:var(--mid);line-height:1.75;max-width:640px;font-weight:300}
+.sec-hdr{margin-bottom:3.5rem}
+#pricing{background:var(--white)}
+#timeline{background:var(--off-white)}
+#hiring{background:var(--white)}
+#perception{background:var(--off-white)}
+#cta{background:var(--black)}
+
+/* PRICING */
+.pcards{display:grid;grid-template-columns:1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.pcard{background:var(--white);transition:background .2s}
+.pcard.open{background:var(--light)}
+.pcard-hdr{padding:2rem;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer}
+.pcard-hdr:hover{background:var(--light)}
+.pcard-num{font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.75rem;display:block;text-transform:uppercase}
+.pcard-name{font-family:var(--display);font-size:1.75rem;color:var(--black);letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin-bottom:.5rem}
+.pcard-right{text-align:right;flex-shrink:0;padding-left:1rem}
+.pcard-price{font-family:var(--display);font-size:2rem;color:var(--black);letter-spacing:.02em}
+.pcard-period{font-family:var(--body);font-size:.72rem;color:var(--gray);font-weight:400;display:block;margin-top:.2rem}
+.pcard-toggle{font-size:.68rem;color:var(--accent);font-weight:500;margin-top:.75rem;letter-spacing:.06em;text-transform:uppercase}
+.pcard-body{overflow:hidden;max-height:0;transition:max-height .45s ease}
+.pcard-body.open{max-height:3200px}
+.pcard-inner{padding:0 2rem 2rem;border-top:1px solid var(--rule);padding-top:1.5rem}
+.pcard-headline{font-family:var(--display);font-size:1.25rem;color:var(--accent);letter-spacing:.03em;text-transform:uppercase;margin-bottom:.875rem}
+.pcard-desc{font-size:.875rem;color:var(--mid);line-height:1.75;margin-bottom:1.5rem;font-weight:300}
+.pcard-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:600px){.pcard-cols{grid-template-columns:1fr}}
+.vlist{list-style:none;display:flex;flex-direction:column;gap:.875rem}
+.vlist li{display:flex;align-items:flex-start;gap:.75rem;font-size:.8125rem;color:var(--mid);line-height:1.6;font-weight:300}
+.vlist li::before{content:'→';color:var(--accent);font-weight:600;flex-shrink:0}
+.tbadge{display:inline-block;font-family:var(--mono);font-size:.58rem;background:var(--off-white);color:var(--mid);border:1px solid var(--rule);border-radius:var(--r);padding:.2rem .5rem;margin:.25rem .25rem 0 0;letter-spacing:.04em;text-transform:uppercase}
+
+/* LINE-ITEM TABLE */
+.li-wrap{margin-top:1.75rem;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.li-wrap-hdr{background:var(--off-white);padding:.75rem 1.25rem;font-family:var(--mono);font-size:.58rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.li-table{width:100%;border-collapse:collapse;font-size:.8125rem;background:var(--white)}
+.li-table th{padding:.7rem 1.25rem;text-align:left;font-family:var(--mono);font-size:.56rem;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--rule)}
+.li-table th.num,.li-table td.num{text-align:right;white-space:nowrap}
+.li-table td{padding:.8rem 1.25rem;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--mid);font-weight:300}
+.li-table td.desc{color:var(--ink);font-weight:400}
+.li-table tbody tr:last-child td{border-bottom:none}
+.li-table tfoot td{padding:.9rem 1.25rem;border-top:2px solid var(--ink);font-weight:600;color:var(--ink);font-size:.875rem;background:var(--off-white)}
+.li-table tfoot td.num{font-family:var(--display);font-size:1.25rem;letter-spacing:.02em;color:var(--accent);font-weight:400}
+.li-placeholder td{padding:1.4rem 1.25rem;text-align:center;color:var(--gray);font-size:.78rem;font-weight:300;background:repeating-linear-gradient(45deg,var(--light),var(--light) 10px,var(--off-white) 10px,var(--off-white) 20px)}
+.li-table tr.li-group td{background:var(--accent-dim);padding:.55rem 1.25rem;border-bottom:1px solid var(--rule)}
+.li-table tr.li-group em{font-style:normal;font-family:var(--mono);font-size:.58rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.li-table tr.li-sub td{background:var(--light);font-weight:600;color:var(--ink)}
+.li-table tr.li-sub td.desc{color:var(--ink)}
+.li-table tr.li-sub td.num{color:var(--ink2)}
+
+.total-band{background:var(--black);color:var(--white);padding:2rem;display:flex;align-items:center;justify-content:space-between;margin-top:1px;flex-wrap:wrap;gap:1rem;border-radius:0 0 4px 4px}
+.total-band-lbl{font-family:var(--display);font-size:1.25rem;letter-spacing:.03em;text-transform:uppercase}
+.total-band-sub{font-family:var(--mono);font-size:.6rem;opacity:.4;letter-spacing:.06em;text-transform:uppercase;margin-top:.3rem}
+.total-band-amt{font-family:var(--display);font-size:2.5rem;letter-spacing:.02em}
+
+/* GANTT */
+.gantt{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.gantt-scale{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid var(--rule);background:var(--off-white)}
+.gantt-scale-lbl{padding:.85rem 1.25rem;font-family:var(--mono);font-size:.56rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;border-right:1px solid var(--rule);display:flex;align-items:center}
+.gantt-weeks{display:grid;grid-template-columns:repeat(12,1fr)}
+.gantt-week{padding:.85rem .15rem;text-align:center;font-family:var(--mono);font-size:.54rem;color:var(--gray);border-right:1px solid var(--rule)}
+.gantt-week:last-child{border-right:none}
+.gantt-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid var(--rule);align-items:center}
+.gantt-row:last-child{border-bottom:none}
+.gantt-row-lbl{padding:1.1rem 1.25rem;border-right:1px solid var(--rule);height:100%;display:flex;flex-direction:column;justify-content:center}
+.gantt-row-name{font-family:var(--display);font-size:1.1rem;color:var(--black);letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.gantt-row-dur{font-size:.62rem;color:var(--gray);font-family:var(--mono);margin-top:.3rem;letter-spacing:.04em}
+.gantt-track{position:relative;height:66px}
+.gantt-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr)}
+.gantt-grid span{border-right:1px solid var(--rule)}
+.gantt-grid span:last-child{border-right:none}
+.gantt-bar{position:absolute;top:50%;transform:translateY(-50%);height:28px;border-radius:3px;display:flex;align-items:center;padding:0 .75rem;font-family:var(--mono);font-size:.6rem;color:#fff;letter-spacing:.04em;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.gantt-bar.rebrand{background:var(--accent)}
+.gantt-bar.web{background:var(--accent-2)}
+.gantt-bar.video{background:var(--amber)}
+.gantt-bar-ext{opacity:.45;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25),rgba(255,255,255,.25) 4px,transparent 4px,transparent 8px)}
+@media(max-width:760px){
+  .gantt-scale,.gantt-row{grid-template-columns:96px 1fr}
+  .gantt-scale-lbl,.gantt-row-lbl{padding-left:.75rem;padding-right:.6rem}
+  .gantt-row-name{font-size:.85rem}
+  .gantt-bar{font-size:0;padding:0}
+  .gantt-week{font-size:.46rem}
+}
+.gantt-legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;padding:0 .25rem}
+.gantt-legend-item{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--mid);font-weight:300}
+.gantt-legend-swatch{width:14px;height:14px;border-radius:3px}
+.gantt-callout{margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--accent-dim);border:1px solid rgba(27,77,122,.15);border-left:3px solid var(--accent);border-radius:4px;font-size:.8125rem;color:var(--ink2);line-height:1.7;font-weight:300}
+.gantt-callout strong{color:var(--accent);font-weight:600}
+
+/* RESEARCH */
+.research-lead{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+@media(max-width:760px){.research-lead{grid-template-columns:1fr}}
+.stat-block{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:2rem;position:relative;overflow:hidden}
+.stat-block::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.stat-big{font-family:var(--display);font-size:3.5rem;color:var(--accent);letter-spacing:.02em;line-height:.9;margin-bottom:.5rem}
+.stat-lbl{font-size:.875rem;color:var(--ink);font-weight:500;margin-bottom:.5rem;line-height:1.4}
+.stat-src{font-family:var(--mono);font-size:.58rem;color:var(--gray);letter-spacing:.04em;text-transform:uppercase}
+.stat-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:3rem}
+@media(max-width:760px){.stat-grid4{grid-template-columns:1fr 1fr}}
+.stat-cell{background:var(--white);padding:1.75rem 1.5rem}
+.stat-cell-val{font-family:var(--display);font-size:2.5rem;color:var(--black);letter-spacing:.02em;line-height:1;margin-bottom:.4rem}
+.stat-cell-val.accent{color:var(--accent)}
+.stat-cell-lbl{font-family:var(--mono);font-size:.58rem;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;line-height:1.5}
+.prose{max-width:760px}
+.prose h3{font-family:var(--display);font-size:1.5rem;color:var(--black);letter-spacing:.02em;text-transform:uppercase;margin:2.5rem 0 1rem}
+.prose p{font-size:.9375rem;color:var(--mid);line-height:1.8;font-weight:300;margin-bottom:1.25rem}
+.prose strong{color:var(--ink);font-weight:600}
+.pullquote{border-left:3px solid var(--accent);padding:.5rem 0 .5rem 1.75rem;margin:2rem 0;font-family:var(--display);font-size:1.5rem;color:var(--ink);letter-spacing:.01em;line-height:1.2;text-transform:uppercase}
+.cite-tag{font-family:var(--mono);font-size:.58rem;color:var(--accent);vertical-align:super;text-decoration:none;margin-left:1px}
+.cite-tag:hover{text-decoration:underline}
+
+/* CALC */
+.calc{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-top:2.5rem}
+.calc-hdr{background:var(--off-white);padding:1.25rem 2rem;border-bottom:1px solid var(--rule)}
+.calc-hdr-title{font-family:var(--display);font-size:1.25rem;color:var(--black);letter-spacing:.03em;text-transform:uppercase}
+.calc-hdr-sub{font-size:.75rem;color:var(--gray);margin-top:.3rem;font-weight:300}
+.calc-body{padding:1.5rem 2rem}
+.calc-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--rule);font-size:.875rem}
+.calc-row:last-of-type{border-bottom:none}
+.calc-row .lbl{color:var(--mid);font-weight:300}
+.calc-row .val{font-family:var(--mono);font-weight:500;color:var(--ink);white-space:nowrap}
+.calc-row.total{border-top:2px solid var(--ink);margin-top:.4rem;padding-top:1rem}
+.calc-row.total .lbl{color:var(--ink);font-weight:600}
+.calc-row.total .val{font-family:var(--display);font-size:1.75rem;color:var(--accent);letter-spacing:.02em}
+.calc-foot{padding:1rem 2rem;background:var(--off-white);border-top:1px solid var(--rule);font-size:.7rem;color:var(--gray);font-weight:300;line-height:1.6}
+
+/* CTA */
+#cta .sec-lbl{color:var(--accent-2)}
+#cta .sec-title{color:var(--white)}
+#cta .sec-sub{color:rgba(255,255,255,.5)}
+.cta-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:3rem}
+@media(max-width:700px){.cta-steps{grid-template-columns:1fr 1fr}}
+.cta-step{padding:2rem;background:rgba(255,255,255,.03)}
+.cta-num{font-family:var(--mono);font-size:.62rem;color:var(--accent-2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;display:block}
+.cta-stitle{font-family:var(--display);font-size:1.25rem;color:var(--white);letter-spacing:.03em;text-transform:uppercase;margin-bottom:.75rem}
+.cta-stext{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7;font-weight:300}
+.cta-actions{display:flex;gap:1rem;margin-top:3rem;flex-wrap:wrap;align-items:center}
+.btn-accent{background:var(--accent);color:var(--white);border:none;padding:1rem 2.5rem;font-family:var(--body);font-size:.875rem;font-weight:600;border-radius:var(--r);cursor:pointer;transition:all .2s;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:inline-block}
+.btn-accent:hover{background:#143a5e;transform:translateY(-1px)}
+
+/* FOOTER */
+.footer{background:rgba(0,0,0,.95);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:1rem}
+@media(max-width:700px){.footer{padding:1.5rem}}
+.footer-logos{display:flex;align-items:center;gap:1.25rem}
+.footer-logos img{height:22px;width:auto;object-fit:contain;opacity:.5}
+.footer-logos img.ck{filter:brightness(0) invert(1);opacity:.4}
+.footer-sep{width:1px;height:18px;background:rgba(255,255,255,.1)}
+.footer-meta{font-family:var(--mono);font-size:.58rem;color:rgba(255,255,255,.2);letter-spacing:.06em;text-transform:uppercase}
+.src-link{display:block;text-decoration:none;padding:.875rem 1rem;background:var(--off-white);border:1px solid var(--rule);border-radius:var(--r);transition:all .2s}
+.src-link:hover{border-color:var(--accent);background:var(--accent-dim2)}
+.src-link strong{display:block;font-size:.875rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.src-link span{font-size:.775rem;color:var(--mid);line-height:1.55;font-weight:300}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div style="background:var(--white);padding:5rem 3rem 4rem">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:2rem;margin-bottom:4rem;flex-wrap:wrap">
+      <img src="https://framerusercontent.com/images/5AXtk8mTlrNcgAZD1Kmw8k8eo.png?width=2548&height=719" alt="Mox Collective" style="height:28px;width:auto;object-fit:contain" />
+      <div style="width:1px;height:24px;background:var(--rule)"></div>
+      <span style="font-family:var(--body);font-size:.8125rem;color:var(--gray);font-weight:300">A brand &amp; digital strategy prepared for</span>
+      <div style="width:1px;height:24px;background:var(--rule)"></div>
+      <img src="https://ck-engineers.com/wp-content/uploads/sites/2/2026/02/CKLogo.png" alt="CK Engineering" style="height:46px;width:auto;object-fit:contain" />
+    </div>
+    <div style="display:inline-flex;align-items:center;gap:.625rem;font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.75rem;padding:.35rem .75rem;background:var(--accent-dim);border:1px solid rgba(27,77,122,.15);border-radius:2px">◆ Brand &amp; Digital Strategy · June 2026</div>
+    <h1 style="font-family:var(--display);font-size:clamp(3rem,6vw,5.5rem);line-height:.95;color:var(--black);letter-spacing:.02em;text-transform:uppercase;margin-bottom:1.5rem">A Brand Built<br>to <span style="color:var(--accent)">Scale With You.</span></h1>
+    <p style="font-size:.9375rem;color:var(--mid);line-height:1.75;max-width:680px;font-weight:300;margin-bottom:2.5rem">CK Engineering has spent two decades earning a reputation for precise, reliable, buildable design across commercial, industrial, and residential land development. You're entering a period of rapid growth — and the brand needs to signal the firm you're becoming, not the one you started as. This is a plan to mature CK's identity, modernize its digital home, and turn the careers page into a recruiting asset, so the right clients and the right engineers encounter a firm worthy of their trust before the first conversation.</p>
+    <button class="btn-accent" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View the Investment ↓</button>
+  </div>
+</div>
+
+<!-- INVESTMENT -->
+<section id="pricing">
+  <div class="si">
+    <div class="sec-hdr">
+      <span class="sec-lbl">01 — Investment Breakdown</span>
+      <h2 class="sec-title">Three moves. One<br>credible firm.</h2>
+      <p class="sec-sub">Each engagement is an asset, not an expense — a durable upgrade to how CK is perceived by clients and candidates. Click any card to expand the rationale and the line-item breakdown.</p>
+    </div>
+    <div class="pcards" id="pcards"></div>
+    <div class="total-band">
+      <div>
+        <div class="total-band-lbl">Total Engagement Investment</div>
+        <div class="total-band-sub">One-time buildout · Rebrand + Website + Careers Video</div>
+      </div>
+      <div class="total-band-amt">$56,490</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="si">
+    <div class="sec-hdr">
+      <span class="sec-lbl">02 — Typical Timeline</span>
+      <h2 class="sec-title">A sequenced rollout,<br>not a scramble.</h2>
+      <p class="sec-sub">The brand comes first because it sets the visual language everything else inherits — the website and the careers video both build on the identity decisions made in the rebrand. Video production runs in parallel with the website build to compress the overall schedule.</p>
+    </div>
+
+    <div class="gantt">
+      <div class="gantt-scale">
+        <div class="gantt-scale-lbl">Workstream</div>
+        <div class="gantt-weeks">
+          <div class="gantt-week">W1</div><div class="gantt-week">W2</div><div class="gantt-week">W3</div>
+          <div class="gantt-week">W4</div><div class="gantt-week">W5</div><div class="gantt-week">W6</div>
+          <div class="gantt-week">W7</div><div class="gantt-week">W8</div><div class="gantt-week">W9</div>
+          <div class="gantt-week">W10</div><div class="gantt-week">W11</div><div class="gantt-week">W12</div>
+        </div>
+      </div>
+
+      <!-- REBRAND: 4-6 weeks -> solid 0-4, dashed extension to 6 -->
+      <div class="gantt-row">
+        <div class="gantt-row-lbl">
+          <div class="gantt-row-name">Rebrand</div>
+          <div class="gantt-row-dur">4–6 weeks</div>
+        </div>
+        <div class="gantt-track">
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar rebrand" style="left:0%;width:33.33%">Identity &amp; system</div>
+          <div class="gantt-bar rebrand gantt-bar-ext" style="left:33.33%;width:16.67%"></div>
+        </div>
+      </div>
+
+      <!-- WEBSITE: 6-12 weeks, starts W6 -> solid W6-W12 (6wk floor), dashed represents range tail handled by note -->
+      <div class="gantt-row">
+        <div class="gantt-row-lbl">
+          <div class="gantt-row-name">Website Rebuild</div>
+          <div class="gantt-row-dur">6–12 weeks</div>
+        </div>
+        <div class="gantt-track">
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar web" style="left:41.67%;width:50%">Design → build → launch</div>
+        </div>
+      </div>
+
+      <!-- VIDEO: 2-3 weeks, concurrent with website, W7-W9 -->
+      <div class="gantt-row">
+        <div class="gantt-row-lbl">
+          <div class="gantt-row-name">Careers Video</div>
+          <div class="gantt-row-dur">2–3 weeks · concurrent</div>
+        </div>
+        <div class="gantt-track">
+          <div class="gantt-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gantt-bar video" style="left:50%;width:16.67%">Shoot &amp; edit</div>
+          <div class="gantt-bar video gantt-bar-ext" style="left:66.67%;width:8.33%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gantt-legend">
+      <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--accent)"></span>Rebrand</div>
+      <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--accent-2)"></span>Website Rebuild</div>
+      <div class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:var(--amber)"></span>Careers Video</div>
+      <div class="gantt-legend-item"><span class="gantt-legend-swatch gantt-bar-ext" style="background:var(--mid)"></span>Range / buffer</div>
+    </div>
+
+    <div class="gantt-callout">
+      <strong>Why this order:</strong> The website and the careers video both inherit the typography, color, and tone established in the rebrand, so the identity is locked before either begins. Running video production alongside the website build keeps the full program to roughly <strong>12 weeks end-to-end</strong> rather than ~17 if run sequentially. Solid bars show the working schedule; hatched segments show the range / review buffer.
+    </div>
+  </div>
+</section>
+
+<!-- HIRING ROI -->
+<section id="hiring">
+  <div class="si">
+    <div class="sec-hdr">
+      <span class="sec-lbl">03 — The Research · Hiring ROI</span>
+      <h2 class="sec-title">A brand is a<br>recruiting instrument.</h2>
+      <p class="sec-sub">CK is about to compete for civil engineers in a tight market. The single largest lever on the cost and speed of that hiring is not the job posting — it's how the firm is perceived before a candidate ever applies. The data on this is unusually consistent.</p>
+    </div>
+
+    <div class="stat-grid4">
+      <div class="stat-cell"><div class="stat-cell-val accent">28%</div><div class="stat-cell-lbl">Lower turnover at firms with a strong employer brand</div></div>
+      <div class="stat-cell"><div class="stat-cell-val accent">up to&nbsp;50%</div><div class="stat-cell-lbl">Reduction in cost-per-hire</div></div>
+      <div class="stat-cell"><div class="stat-cell-val accent">50%</div><div class="stat-cell-lbl">More qualified applicants per opening</div></div>
+      <div class="stat-cell"><div class="stat-cell-val accent">1–2×</div><div class="stat-cell-lbl">Faster time-to-hire</div></div>
+    </div>
+
+    <div class="prose">
+      <p>The mechanism is straightforward. When a firm is known, trusted, and looks like a place engineers want to work, the inbound pipeline begins to replace the most expensive reactive channels — job boards, agency fees, and the staff hours spent sifting unqualified applicants.<a class="cite-tag" href="#" onclick="openSources();return false;">[1]</a> A stronger employer brand draws better-matched candidates organically, through referrals and passive interest, which is exactly the talent that's hardest and most costly to reach through paid recruiting.<a class="cite-tag" href="#" onclick="openSources();return false;">[2]</a></p>
+
+      <p>The flip side carries a hard cost. Research summarized by LinkedIn and reported across the industry finds that companies with a <strong>weak</strong> employer brand pay measurably more to hire — and in some analyses must offer up to roughly 10% higher salaries to compensate for reputation, on the order of several thousand dollars more per hire.<a class="cite-tag" href="#" onclick="openSources();return false;">[3]</a> For a firm planning to grow headcount quickly, that premium compounds with every role.</p>
+
+      <div class="pullquote">"You can automate the process. You cannot automate perception."</div>
+
+      <p>Independent analyses converge on similar numbers: one industry review cites a <strong>37% reduction in cost-per-hire</strong> and <strong>42% more qualified applicants</strong> for organizations with strong employer brands; the average U.S. cost-per-hire now sits near <strong>$4,700</strong>, rising to as much as <strong>$28,000</strong> for senior roles, while turnover costs roughly a third of the departing employee's annual salary.<a class="cite-tag" href="#" onclick="openSources();return false;">[4]</a> These are the line items a mature brand quietly shrinks.</p>
+
+      <h3>What this means for CK specifically</h3>
+      <p>CK's careers page already describes a genuinely attractive offer — end-to-end project exposure, mentorship, paid licensure, a defined growth track, and a fast 2–3 week time-to-offer. The gap is not the substance; it's that the brand and digital presence don't yet <em>signal</em> that substance to a skeptical engineer comparing firms. The rebrand and careers video exist to close that gap: to make the firm look, on first contact, exactly as credible and as growth-oriented as it actually is. The timeline above sequences the video to launch alongside the new site so the careers landing page debuts as a single, coherent recruiting asset.</p>
+    </div>
+
+    <!-- COST MODEL -->
+    <div class="calc">
+      <div class="calc-hdr">
+        <div class="calc-hdr-title">Illustrative Payback Model</div>
+        <div class="calc-hdr-sub">A conservative, directional estimate — not a guarantee. Adjust the inputs to CK's actual hiring plan.</div>
+      </div>
+      <div class="calc-body">
+        <div class="calc-row"><span class="lbl">Planned engineering / staff hires over 24 months</span><span class="val">10 hires</span></div>
+        <div class="calc-row"><span class="lbl">Blended fully-loaded cost-per-hire today (incl. agency &amp; staff time)</span><span class="val">$9,000</span></div>
+        <div class="calc-row"><span class="lbl">Conservative cost-per-hire reduction from stronger brand (≈30%)</span><span class="val">−$2,700 / hire</span></div>
+        <div class="calc-row"><span class="lbl">Direct hiring savings across 10 hires</span><span class="val">$27,000</span></div>
+        <div class="calc-row"><span class="lbl">One avoided first-year turnover event (≈⅓ of $95k salary)</span><span class="val">$31,000</span></div>
+        <div class="calc-row total"><span class="lbl">Modeled 2-year value, hiring alone</span><span class="val">$58,000</span></div>
+      </div>
+      <div class="calc-foot">Figures are illustrative benchmarks drawn from the cited employer-branding research applied to representative CK inputs; they exclude all client-side revenue impact covered in the next section. Actual results vary with market conditions, hiring volume, and execution. The intent is to show that the recruiting case alone can rationalize the rebrand before any client-facing benefit is counted.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCEPTION -->
+<section id="perception">
+  <div class="si">
+    <div class="sec-hdr">
+      <span class="sec-lbl">04 — The Research · Perception &amp; Client Trust</span>
+      <h2 class="sec-title">Credibility is<br>judged before<br>it's proven.</h2>
+      <p class="sec-sub">In B2B, a prospective client forms a verdict on a firm's competence from its visual presentation long before they assess the actual engineering. For a firm scaling into larger, higher-stakes projects, closing that perception gap is what unlocks the next tier of work.</p>
+    </div>
+
+    <div class="research-lead">
+      <div class="stat-block">
+        <div class="stat-big">90%</div>
+        <div class="stat-lbl">of B2B buyers won't shortlist a vendor they don't already know and trust</div>
+        <div class="stat-src">Source: B2B vendor-selection research</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-big">55%</div>
+        <div class="stat-lbl">of a brand's first impression is visual — formed in seconds, before a word is read</div>
+        <div class="stat-src">Source: brand-perception research</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>For an engineering firm, a brand identity has to do something a consumer brand never has to: <strong>communicate credibility under scrutiny.</strong> The buyer evaluating an engineering consultancy isn't asking "do I like this?" — they're asking "can I defend choosing this firm to my boss, my lender, or my board?" The identity has to answer that question at the visual level, before the positioning or the proof is even assessed.<a class="cite-tag" href="#" onclick="openSources();return false;">[5]</a></p>
+
+      <p>That's why strong B2B identity in technical sectors is defined by <em>restraint</em> rather than expressiveness — precise mark construction, clean typography, controlled color, and photography that conveys the scale and quality of the work. It's built to hold up under close inspection, not to make a flashy first impression that erodes on the second look.<a class="cite-tag" href="#" onclick="openSources();return false;">[5]</a> A polished, consistent visual system causes a buyer to subconsciously categorize the firm as <strong>low-risk</strong> — and in engineering, where the client is buying reliability, low-risk is the entire pitch.<a class="cite-tag" href="#" onclick="openSources();return false;">[6]</a></p>
+
+      <div class="pullquote">"Disorganization in a firm raises serious flags. A coherent brand signals the opposite — professionalism, reliability, attention to detail."</div>
+
+      <p>The cost of inconsistency is concrete. When a prospect encounters a website, a proposal, and a site sign that don't look like they belong to the same company, the message isn't neutral — it reads as disorganization, and in a firm whose product <em>is</em> precision, that quietly undermines every other signal of competence.<a class="cite-tag" href="#" onclick="openSources();return false;">[6,7]</a> Conversely, a coherent visual system shortens the sales cycle by reducing the friction in a buyer's decision, and consistent branding is associated with revenue lifts in the range of <strong>10–20%</strong>.<a class="cite-tag" href="#" onclick="openSources();return false;">[8]</a></p>
+
+      <h3>The scaling problem this solves</h3>
+      <p>CK's challenge is specific: the firm is growing rapidly and pursuing larger projects, but a brand built for a smaller, earlier-stage company creates a ceiling. Larger clients and institutional partners read an outdated or inconsistent identity as a signal of capacity — they wonder whether the firm can actually handle the scale. The rebrand's job is to remove that doubt, so CK's reputation, visual presence, and ambitions all tell the same story. As the research consistently notes, <strong>81% of B2B leaders say brand is "very important" to revenue growth</strong>, and a majority treat brand building as a strategic priority precisely because perception gates the pipeline.<a class="cite-tag" href="#" onclick="openSources();return false;">[9]</a></p>
+
+      <p>This is the foundational logic behind the entire engagement: the rebrand sets the standard, the website becomes the credible digital home that larger clients expect to find, and the careers video proves — visually — that CK is a firm worth joining. Each reinforces the same conclusion in the mind of whoever is evaluating you: <strong>this is a firm built to be trusted with what comes next.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="si">
+    <span class="sec-lbl">05 — What Comes Next</span>
+    <h2 class="sec-title">From outdated to<br>industry-leading.</h2>
+    <p class="sec-sub">A defined delivery path with a single point of contact at Mox. No project-management overhead on CK's side.</p>
+    <div class="cta-steps">
+      <div class="cta-step"><span class="cta-num">Step 01</span><div class="cta-stitle">Discovery &amp; Alignment</div><div class="cta-stext">A working session on positioning, audience, growth goals, and the perception gap — for both clients and candidates.</div></div>
+      <div class="cta-step"><span class="cta-num">Step 02</span><div class="cta-stitle">Brand Foundation</div><div class="cta-stext">Identity, system, and guidelines built first, so every downstream asset inherits a single, consistent visual language.</div></div>
+      <div class="cta-step"><span class="cta-num">Step 03</span><div class="cta-stitle">Build &amp; Produce</div><div class="cta-stext">Website rebuild and careers video produced in parallel, with structured review cycles before launch.</div></div>
+      <div class="cta-step"><span class="cta-num">Step 04</span><div class="cta-stitle">Launch</div><div class="cta-stext">New brand, site, and careers landing page go live together — a coherent debut for clients and recruits alike.</div></div>
+    </div>
+    <div class="cta-actions">
+      <a href="https://wearemox.com/contact" target="_blank" class="btn-accent">Start with Mox →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES MODAL -->
+<div id="sources-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(6px)" onclick="if(event.target===this)closeSources()">
+  <div style="background:#fff;border-radius:4px;max-width:660px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.2)">
+    <div style="padding:2rem 2rem 1.25rem;border-bottom:1px solid var(--rule);display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div style="font-family:var(--display);font-size:1.75rem;color:var(--black);letter-spacing:.03em;text-transform:uppercase">Research Sources</div>
+        <div style="font-size:.75rem;color:var(--gray);margin-top:.375rem;font-weight:300">Studies and benchmarks referenced in the rebrand research sections</div>
+      </div>
+      <button onclick="closeSources()" style="background:none;border:1px solid var(--rule);color:var(--gray);font-size:.875rem;cursor:pointer;width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:1rem;transition:all .15s">✕</button>
+    </div>
+    <div style="padding:1.75rem 2rem">
+      <div style="border-bottom:1px solid var(--rule);padding-bottom:1.5rem;margin-bottom:1.5rem">
+        <div style="font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Employer Brand &amp; Hiring ROI</div>
+        <div style="display:flex;flex-direction:column;gap:.875rem">
+          <a href="https://flexa.careers/blog/measuring-the-roi-of-employer-branding" target="_blank" class="src-link"><strong>[1] Flexa — Measuring the ROI of Employer Branding</strong><span>The inbound-pipeline mechanism: a strong brand reduces reliance on job boards, agencies, and reactive recruitment, lowering cost-per-hire and time-to-hire.</span></a>
+          <a href="https://www.konkergroup.com/the-hidden-roi-of-employer-branding/" target="_blank" class="src-link"><strong>[2] Konker — The Hidden ROI of Employer Branding</strong><span>How a strong brand attracts better-matched candidates organically via referrals and passive interest, reducing advertising and screening spend.</span></a>
+          <a href="https://universumglobal.com/resources/blog/measure-employer-branding-roi/" target="_blank" class="src-link"><strong>[3] Universum — Measure Employer Branding ROI</strong><span>LinkedIn research cited for the 28% lower turnover and up to 50% cost-per-hire reduction associated with strong employer brands.</span></a>
+          <a href="https://www.vouchfor.com/blog/proving-employer-branding-roi" target="_blank" class="src-link"><strong>[4] Vouch — Proving Employer Branding ROI (2026)</strong><span>U.S. average cost-per-hire (~$4,700, up to $28,000 for senior roles), 33% turnover cost benchmark, and the 50% / 28% / faster-hiring figures.</span></a>
+        </div>
+      </div>
+      <div style="padding-bottom:.5rem">
+        <div style="font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Brand Perception &amp; B2B Credibility</div>
+        <div style="display:flex;flex-direction:column;gap:.875rem">
+          <a href="https://www.highlypersuasive.com/branding/brand-identity-design/" target="_blank" class="src-link"><strong>[5] Highly Persuasive — Brand Identity &amp; Visual Systems</strong><span>Why B2B identity must communicate credibility under scrutiny; the role of restraint, precise typography, and controlled color in technical sectors.</span></a>
+          <a href="https://www.mycalidesigns.com/blog/visual-identity-process-manufacturers" target="_blank" class="src-link"><strong>[6] MyCali Designs — Visual Identity for Manufacturers</strong><span>How a polished, consistent visual system causes buyers to categorize a firm as low-risk and shortens the sales cycle.</span></a>
+          <a href="https://market.grantmarketing.com/blog/the-importance-of-visual-branding-in-b2b-manufacturing" target="_blank" class="src-link"><strong>[7] Grant Marketing — Visual Branding in B2B</strong><span>The cost of inconsistency: mismatched touchpoints read as disorganization and undermine perceived reliability.</span></a>
+          <a href="https://illustrationsai.com/blog/brand-consistency-checklist" target="_blank" class="src-link"><strong>[8] Illustrations AI — Brand Consistency &amp; Visual Identity</strong><span>55% of first impressions are visual; consistent branding associated with 10–20% revenue lifts.</span></a>
+          <a href="https://transmissionagency.com/what-is-b2b-branding/" target="_blank" class="src-link"><strong>[9] Transmission — State of B2B Brand Building</strong><span>81% of B2B decision-makers say brand is "very important" to revenue growth; 61% treat brand building as a strategic priority. Also cited: 90% of B2B buyers won't shortlist an unknown/untrusted vendor.</span></a>
+        </div>
+      </div>
+    </div>
+    <div style="padding:1.25rem 2rem;border-top:1px solid var(--rule);background:var(--off-white);border-radius:0 0 4px 4px">
+      <p style="font-size:.7rem;color:var(--gray);line-height:1.6;font-weight:300">All statistics are representative industry benchmarks drawn from the sources above. The payback model is illustrative and directional, not a guaranteed forecast; actual results depend on CK Engineering's hiring volume, market conditions, and execution.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logos">
+    <img src="https://framerusercontent.com/images/5AXtk8mTlrNcgAZD1Kmw8k8eo.png?width=2548&height=719" alt="Mox" style="filter:brightness(0) invert(1);opacity:.5" />
+    <div class="footer-sep"></div>
+    <img class="ck" src="https://ck-engineers.com/wp-content/uploads/sites/2/2026/02/CKLogo.png" alt="CK Engineering" style="height:26px" />
+  </div>
+  <div class="footer-meta">Brand &amp; Digital Strategy · June 2026 · Confidential · Figures are estimates</div>
+  <button onclick="openSources()" style="background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;text-decoration:underline;text-underline-offset:3px;padding:0">Research Sources</button>
+</footer>
+
+<script>
+function openSources(){var o=document.getElementById('sources-overlay');o.style.display='flex';document.body.style.overflow='hidden';}
+function closeSources(){var o=document.getElementById('sources-overlay');o.style.display='none';document.body.style.overflow='';}
+
+var pricingData=[
+  {num:'01',name:'Rebrand',tag:'Brand Foundation',price:'$24,265',period:'one-time · incl. agency fee',
+   headline:'MATURE THE IDENTITY TO MATCH THE AMBITION.',
+   desc:'A complete identity system designed to make CK read as the established, growth-ready firm it is becoming — built on the restraint and precision that signal credibility in engineering. Everything downstream inherits this foundation.',
+   bullets:[
+     'Brand strategy & positioning — how CK shows up to larger clients and top engineering talent',
+     'Primary logo & mark refinement with full lockup family and clear-space rules',
+     'Color system, typography, and grid built for legibility and "low-risk" credibility',
+     'Photography & art direction guidelines for project and team imagery',
+     'Brand guidelines document so the system stays consistent as the team grows',
+     'Brand rollout: signage, business cards, and flyers'
+   ],
+   tags:['Brand Strategy','Identity System','Logo','Guidelines','Collateral'],
+   rows:[
+     {desc:'<em>Pre-Production · R&amp;D</em>',detail:'',amount:'',group:true},
+     {desc:'Market + Competitor Research',detail:'14 hrs',amount:'$2,800'},
+     {desc:'Brand positioning & messaging strategy',detail:'14 hrs',amount:'$2,800'},
+     {desc:'Meetings',detail:'12 hrs',amount:'$1,200'},
+     {desc:'Subtotal — Pre-Production',detail:'',amount:'$6,800',sub:true},
+     {desc:'<em>Production · Design</em>',detail:'',amount:'',group:true},
+     {desc:'3 Logo Options',detail:'22 hrs',amount:'$4,400'},
+     {desc:'Brand Guidelines (color + type + standards)',detail:'8 hrs',amount:'$1,600'},
+     {desc:'Creative Direction',detail:'12 hrs',amount:'$2,400'},
+     {desc:'3 Rounds of Revisions',detail:'12 hrs',amount:'$900'},
+     {desc:'Brand Rollout (signage, business cards, flyers)',detail:'25 hrs',amount:'$5,000'},
+     {desc:'Subtotal — Production',detail:'',amount:'$14,300',sub:true},
+     {desc:'Production Subtotal',detail:'',amount:'$21,100',sub:true},
+     {desc:'Agency Fee',detail:'15%',amount:'$3,165'}
+   ]},
+  {num:'02',name:'Website Rebuild',tag:'Digital Home',price:'$24,725',period:'one-time · incl. agency fee',
+   headline:'THE CREDIBLE DIGITAL HOME LARGER CLIENTS EXPECT.',
+   desc:'A modern, fast, fully responsive website built on the new brand — the place where clients and candidates verify that CK is a firm worth trusting. Architected to grow with the firm and easy for the team to maintain.',
+   bullets:[
+     'Market + user research and UX mapping on the new identity',
+     'Full site map, UX, and responsive design',
+     'Homepage and additional page development',
+     'Dedicated careers landing page engineered to convert candidates',
+     'Theme install, testing, revisions, and launch',
+     'Performance-optimized build for fast load times and strong SEO signals'
+   ],
+   tags:['Web Design','Responsive Build','Careers Page','SEO','CMS'],
+   rows:[
+     {desc:'<em>Research + Creative Direction</em>',detail:'',amount:'',group:true},
+     {desc:'Market + User Research',detail:'12 units',amount:'$2,400'},
+     {desc:'UX Mapping',detail:'4 units',amount:'$800'},
+     {desc:'Site Map',detail:'1.5 units',amount:'$300'},
+     {desc:'Meetings',detail:'12 units',amount:'$1,200'},
+     {desc:'Subtotal — Pre-Production',detail:'',amount:'$4,700',sub:true},
+     {desc:'<em>Design</em>',detail:'',amount:'',group:true},
+     {desc:'UI Design',detail:'1 unit',amount:'$7,500'},
+     {desc:'Copy Writing Support',detail:'14 units',amount:'$2,100'},
+     {desc:'Subtotal — Production',detail:'',amount:'$9,600',sub:true},
+     {desc:'<em>Development</em>',detail:'',amount:'',group:true},
+     {desc:'Theme Install + Development',detail:'4 units',amount:'$800'},
+     {desc:'Homepage Development',detail:'10 units',amount:'$2,000'},
+     {desc:'Additional Page Development',detail:'12 units',amount:'$2,400'},
+     {desc:'Testing',detail:'3 units',amount:'$600'},
+     {desc:'Revisions',detail:'4 units',amount:'$800'},
+     {desc:'Launching Website',detail:'3 units',amount:'$600'},
+     {desc:'Subtotal — Post-Production',detail:'',amount:'$7,200',sub:true},
+     {desc:'Production Subtotal',detail:'',amount:'$21,500',sub:true},
+     {desc:'Agency Fee',detail:'15%',amount:'$3,225'}
+   ]},
+  {num:'03',name:'Careers Video',tag:'Recruiting Asset',price:'$7,500',period:'one-time',
+   headline:'PROVE — VISUALLY — THAT CK IS WORTH JOINING.',
+   desc:'A short, polished careers video for the new careers landing page that shows engineers the real CK: the work, the people, the growth track. Produced in parallel with the website so the page launches complete.',
+   bullets:[
+     'Pre-production: director, DP, and producer planning the shoot',
+     'On-site / team filming day capturing real work and culture',
+     'Professional editing, color, and finishing',
+     'Brand-consistent titling and lower-thirds from the new identity',
+     'Optimized exports for web, social, and the careers landing page',
+     'Short-form cutdowns for LinkedIn and recruiting outreach'
+   ],
+   tags:['Concept','Production','Editing','Motion Graphics','Social Cutdowns'],
+   rows:[
+     {desc:'<em>Pre-Production</em>',detail:'',amount:'',group:true},
+     {desc:'Pre-Pro Director',detail:'3 hrs',amount:'$1,800'},
+     {desc:'Pre-Pro DP',detail:'2 hrs',amount:'$1,000'},
+     {desc:'Pre-Pro Producer',detail:'15 hrs',amount:'$1,200'},
+     {desc:'Subtotal — Pre-Production',detail:'',amount:'$4,000',sub:true},
+     {desc:'<em>Production</em>',detail:'',amount:'',group:true},
+     {desc:'Director',detail:'1 day',amount:'$1,500'},
+     {desc:'DP',detail:'1 day',amount:'$1,200'},
+     {desc:'Subtotal — Production',detail:'',amount:'$2,700',sub:true},
+     {desc:'<em>Post-Production</em>',detail:'',amount:'',group:true},
+     {desc:'Editing',detail:'1 unit',amount:'$800'},
+     {desc:'Subtotal — Post-Production',detail:'',amount:'$800',sub:true}
+   ]}
+];
+
+/* Build the line-item table. Replace the placeholder row with your real rows when ready:
+   rows: [ {desc:'Discovery & strategy', detail:'2 workshops + research', amount:'$3,000'}, ... ]
+   Add a `rows` array to any item in pricingData above and it will render automatically. */
+function buildLineItems(item){
+  var bodyRows;
+  if(item.rows && item.rows.length){
+    bodyRows = item.rows.map(function(r){
+      if(r.group){
+        return '<tr class="li-group"><td colspan="3">'+r.desc+'</td></tr>';
+      }
+      if(r.sub){
+        return '<tr class="li-sub"><td class="desc">'+r.desc+'</td><td>'+(r.detail||'')+'</td><td class="num">'+r.amount+'</td></tr>';
+      }
+      return '<tr><td class="desc">'+r.desc+'</td><td>'+(r.detail||'')+'</td><td class="num">'+r.amount+'</td></tr>';
+    }).join('');
+  } else {
+    bodyRows = '<tr class="li-placeholder"><td colspan="3">Line-item breakdown to be added — drop your spreadsheet rows here.</td></tr>';
+  }
+  return ''+
+  '<div class="li-wrap">'+
+    '<div class="li-wrap-hdr"><span>Line-Item Breakdown</span><span>'+item.name+' · '+item.price+'</span></div>'+
+    '<table class="li-table">'+
+      '<thead><tr><th>Item</th><th>Detail</th><th class="num">Amount</th></tr></thead>'+
+      '<tbody>'+bodyRows+'</tbody>'+
+      '<tfoot><tr><td>Total</td><td></td><td class="num">'+item.price+'</td></tr></tfoot>'+
+    '</table>'+
+  '</div>';
+}
+
+function renderPricingCards(){
+  var c=document.getElementById('pcards');
+  c.innerHTML=pricingData.map(function(item,i){
+    var b1=item.bullets.slice(0,3).map(function(b){return '<li>'+b+'</li>';}).join('');
+    var b2=item.bullets.slice(3).map(function(b){return '<li>'+b+'</li>';}).join('');
+    var tags=item.tags.map(function(t){return '<span class="tbadge">'+t+'</span>';}).join('');
+    return '<div class="pcard" id="pcard-'+i+'">'+
+      '<div class="pcard-hdr" onclick="toggleCard('+i+')">'+
+        '<div>'+
+          '<span class="pcard-num">'+item.num+' / '+item.tag+'</span>'+
+          '<div class="pcard-name">'+item.name+'</div>'+
+        '</div>'+
+        '<div class="pcard-right">'+
+          '<div class="pcard-price">'+item.price+'</div>'+
+          '<span class="pcard-period">'+item.period+'</span>'+
+          '<div class="pcard-toggle" id="ptoggle-'+i+'">▼ Expand</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="pcard-body" id="pbody-'+i+'">'+
+        '<div class="pcard-inner">'+
+          '<div class="pcard-headline">'+item.headline+'</div>'+
+          '<div class="pcard-desc">'+item.desc+'</div>'+
+          '<div class="pcard-cols"><ul class="vlist">'+b1+'</ul><ul class="vlist">'+b2+'</ul></div>'+
+          buildLineItems(item)+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+var openCard=null;
+function toggleCard(i){
+  var body=document.getElementById('pbody-'+i);
+  var tog=document.getElementById('ptoggle-'+i);
+  var card=document.getElementById('pcard-'+i);
+  if(openCard===i){body.classList.remove('open');card.classList.remove('open');tog.textContent='▼ Expand';openCard=null;}
+  else{
+    if(openCard!==null){document.getElementById('pbody-'+openCard).classList.remove('open');document.getElementById('pcard-'+openCard).classList.remove('open');document.getElementById('ptoggle-'+openCard).textContent='▼ Expand';}
+    body.classList.add('open');card.classList.add('open');tog.textContent='▲ Collapse';openCard=i;
+  }
+}
+
+renderPricingCards();
+</script>
+</body>
+</html>
